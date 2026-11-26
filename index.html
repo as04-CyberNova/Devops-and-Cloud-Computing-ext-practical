@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Feedback Form</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: #ffffff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        h2 {
+            margin-top: 0;
+            color: #1a73e8;
+            text-align: center;
+        }
+        p.subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #1a73e8;
+        }
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+        .rating-group {
+            display: flex;
+            justify-content: space-between;
+            background: #fafafa;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #eee;
+        }
+        .rating-option {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            gap: 4px;
+        }
+        .btn-submit {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 10px;
+            transition: background-color 0.2s;
+        }
+        .btn-submit:hover {
+            background-color: #1557b0;
+        }
+        .result-box {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e6f4ea;
+            border: 1px solid #ceead6;
+            border-radius: 8px;
+            color: #137333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Online Feedback Form</h2>
+        <p class="subtitle">DevOps and Cloud Computing Lab Practical - Question 2</p>
+
+        <form id="feedbackForm" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <label for="name">Name *</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required />
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required />
+            </div>
+
+            <div class="form-group">
+                <label for="category">Feedback Category *</label>
+                <select id="category" name="category" required>
+                    <option value="" disabled selected>-- Select a Category --</option>
+                    <option value="Course Content">Course Content</option>
+                    <option value="Lab Infrastructure">Lab Infrastructure</option>
+                    <option value="Instruction / Teaching">Instruction / Teaching</option>
+                    <option value="General Suggestion">General Suggestion</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Rating (1 to 5) *</label>
+                <div class="rating-group">
+                    <label class="rating-option"><input type="radio" name="rating" value="1" required /> 1 (Poor)</label>
+                    <label class="rating-option"><input type="radio" name="rating" value="2" /> 2</label>
+                    <label class="rating-option"><input type="radio" name="rating" value="3" /> 3</label>
+                    <label class="rating-option"><input type="radio" name="rating" value="4" /> 4</label>
+                    <label class="rating-option"><input type="radio" name="rating" value="5" /> 5 (Best)</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="comments">Comments *</label>
+                <textarea id="comments" name="comments" placeholder="Write your comments here..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Submit Feedback</button>
+        </form>
+
+        <div id="resultBox" class="result-box">
+            <h3>Submission Successful!</h3>
+            <p><strong>Name:</strong> <span id="resName"></span></p>
+            <p><strong>Email:</strong> <span id="resEmail"></span></p>
+            <p><strong>Category:</strong> <span id="resCategory"></span></p>
+            <p><strong>Rating:</strong> <span id="resRating"></span></p>
+            <p><strong>Comments:</strong> <span id="resComments"></span></p>
+        </div>
+    </div>
+
+    <script>
+        function handleSubmit(e) {
+            e.preventDefault();
+            const form = document.getElementById('feedbackForm');
+            const data = new FormData(form);
+            document.getElementById('resName').textContent = data.get('name');
+            document.getElementById('resEmail').textContent = data.get('email');
+            document.getElementById('resCategory').textContent = data.get('category');
+            document.getElementById('resRating').textContent = data.get('rating') + ' / 5';
+            document.getElementById('resComments').textContent = data.get('comments');
+            document.getElementById('resultBox').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

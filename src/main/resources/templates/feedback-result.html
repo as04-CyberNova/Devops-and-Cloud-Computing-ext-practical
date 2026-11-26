@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Submitted</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: #ffffff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: left;
+        }
+        .success-banner {
+            background-color: #e6f4ea;
+            border: 1px solid #ceead6;
+            color: #137333;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        h2 {
+            margin-top: 0;
+            color: #1a73e8;
+            text-align: center;
+        }
+        .result-row {
+            margin-bottom: 12px;
+            display: flex;
+            border-bottom: 1px solid #f1f3f4;
+            padding-bottom: 8px;
+        }
+        .result-label {
+            font-weight: bold;
+            color: #555;
+            width: 140px;
+            flex-shrink: 0;
+        }
+        .result-value {
+            color: #202124;
+            word-break: break-word;
+        }
+        .btn-back {
+            display: block;
+            text-align: center;
+            background-color: #1a73e8;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-top: 25px;
+            transition: background-color 0.2s;
+        }
+        .btn-back:hover {
+            background-color: #1557b0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-banner" th:text="${message}">
+            Thank you for your feedback!
+        </div>
+
+        <h2>Submitted Details</h2>
+
+        <div class="result-row">
+            <span class="result-label">Name:</span>
+            <span class="result-value" th:text="${feedback.name}">John Doe</span>
+        </div>
+        <div class="result-row">
+            <span class="result-label">Email:</span>
+            <span class="result-value" th:text="${feedback.email}">john@example.com</span>
+        </div>
+        <div class="result-row">
+            <span class="result-label">Category:</span>
+            <span class="result-value" th:text="${feedback.category}">Course Content</span>
+        </div>
+        <div class="result-row">
+            <span class="result-label">Rating:</span>
+            <span class="result-value" th:text="${feedback.rating} + ' / 5'">5 / 5</span>
+        </div>
+        <div class="result-row">
+            <span class="result-label">Comments:</span>
+            <span class="result-value" th:text="${feedback.comments}">Great lab session!</span>
+        </div>
+
+        <a href="/" class="btn-back">Submit Another Feedback</a>
+    </div>
+</body>
+</html>
